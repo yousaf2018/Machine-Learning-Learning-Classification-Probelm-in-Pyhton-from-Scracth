@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt 
 import numpy as np
+import cv2 as cv
 #class for machine learning probelm classification 
 class AI_model():
     #Training data with x,y,outputlabel
@@ -33,13 +34,14 @@ if __name__ == "__main__":
         for i in range(len(AI_model.training_data)):
             check = AI_model.activated_function(i)
             if AI_model.training_data[i][2] == check:
-                print("Hi")
+                print("Already Learned :)")
             else:
                 AI_model.learning(i,check)
-                print("Happy Learning")
+                print("Mistake alert Learning Time ):")
                 state = 1
         if state == 0:
             print(f"Total Epochs {j}")
+            break
         print(AI_model.w_old[0],AI_model.w_old[1],AI_model.w_old[2])
         print("**************************************************")
     plt.scatter(x,y)
