@@ -13,7 +13,7 @@ class AI_model():
         w1_x = self.w_old[0] * self.training_data[index][0]
         w2_y = self.w_old[1] * self.training_data[index][1]
         wo_x0 = self.w_old[2] * 1
-        sum = w1_x - w2_y + wo_x0
+        sum = w1_x + w2_y + wo_x0
         if sum >= 0:
             return 1
         else:
@@ -21,13 +21,14 @@ class AI_model():
     def learning(self,index,Actual):
         self.w_old[0] = self.w_old[0] + self.l_r*(self.training_data[index][2]-Actual)*self.training_data[index][0]
         self.w_old[1] = self.w_old[1] + self.l_r*(self.training_data[index][2]-Actual)*self.training_data[index][1]
-        self.w_old[2] = self.w_old[2] + self.l_r*(self.training_data[index][2]-Actual)*self.training_data[index][2]
+        self.w_old[2] = self.w_old[2] + self.l_r*(self.training_data[index][2]-Actual)*1
 if __name__ == "__main__":
     AI_model = AI_model()
     x = [1,9.4,2.5,8,0.5,7.9,7,2.8,1.2,7.8]
     y = [1,6.4,2.1,7.7,2.2,8.4,7,0.8,3,6.1]
     #30 epocchs for training
     for j in range(30):
+        state = 0
         print("**************************************************")
         for i in range(len(AI_model.training_data)):
             check = AI_model.activated_function(i)
@@ -36,6 +37,9 @@ if __name__ == "__main__":
             else:
                 AI_model.learning(i,check)
                 print("Happy Learning")
+                state = 1
+        if state == 0:
+            print(f"Total Epochs {j}")
         print(AI_model.w_old[0],AI_model.w_old[1],AI_model.w_old[2])
         print("**************************************************")
     plt.scatter(x,y)
@@ -45,5 +49,5 @@ if __name__ == "__main__":
     s= AI_model.w_old[0]/AI_model.w_old[1]
     # from 1 to 10, by 50
     x=np.linspace(1,10,50)      
-    plt.plot(x, s*x + i)       
+    plt.plot(x, -(s*x + i))       
     plt.show()
