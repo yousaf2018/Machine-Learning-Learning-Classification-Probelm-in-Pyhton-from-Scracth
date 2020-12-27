@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt 
 import numpy as np
-import cv2 as cv
 #class for machine learning probelm classification 
 class AI_model():
     #Training data with x,y,outputlabel
@@ -13,7 +12,7 @@ class AI_model():
     def activated_function(self,index):
         w1_x = self.w_old[0] * self.training_data[index][0]
         w2_y = self.w_old[1] * self.training_data[index][1]
-        wo_x0 = self.w_old[2] * 1
+        wo_x0 = self.w_old[2] * 1            
         sum = w1_x + w2_y + wo_x0
         if sum >= 0:
             return 1
